@@ -14,6 +14,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao() : UserDao
     abstract fun recipeDao() : RecipeDao
     companion object{
+        @Volatile
         private var INSTANCE: AppDatabase? = null
         fun getInstance(context: Context): AppDatabase{
             return INSTANCE?: Room.databaseBuilder(
@@ -21,7 +22,7 @@ abstract class AppDatabase : RoomDatabase() {
                 AppDatabase::class.java,
                 "recipes_database"
             )
-                .fallbackToDestructiveMigration(false)
+                .fallbackToDestructiveMigration(true)
                 .build()
                 .also { INSTANCE = it }
         }

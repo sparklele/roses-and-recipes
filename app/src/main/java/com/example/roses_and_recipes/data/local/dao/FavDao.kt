@@ -5,23 +5,24 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import com.example.roses_and_recipes.data.model.favourite
 import com.example.roses_and_recipes.data.model.meal
 
 @Dao
-interface RecipeDao {
+interface FavDao {
     @Query("SELECT * FROM recipes")
-    suspend fun getAllRecipes(): List<meal>
+    suspend fun getAllRecipes(): List<favourite>
 
     @Query("SELECT * FROM recipes WHERE id = :rId")
     suspend fun getRecipeById(rId: Int): meal
 
     @Insert
-    suspend fun insertRecipe(recipe: meal)
+    suspend fun insertFav(fav: favourite)
 
     @Delete
-    suspend fun deleteRecipe(recipe: meal)
+    suspend fun deleteFav(fav: favourite)
 
     @Update
-    suspend fun updateRecipe(recipe: meal)
+    suspend fun updateFav(fav: favourite)
 
 }
